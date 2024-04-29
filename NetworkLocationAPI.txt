@@ -1,0 +1,71 @@
+openapi: 3.0.0\
+info:\
+  title: Network Location API\
+  version: 1.0.0\
+  description: API to get device location from a mobile network provider.\
+\
+paths:\
+  /location:\
+    get:\
+      summary: Get device location\
+      responses:\
+        '200':\
+          description: Successful response\
+          content:\
+            application/json:\
+              schema:\
+                $ref: '#/components/schemas/LocationResponse'\
+\
+components:\
+  schemas:\
+    LocationResponse:\
+      type: object\
+      properties:\
+        location:\
+          $ref: '#/components/schemas/Location'\
+        device:\
+          $ref: '#/components/schemas/Device'\
+\
+    Location:\
+      type: object\
+      properties:\
+        latitude:\
+          type: number\
+          example: 37.7749\
+        longitude:\
+          type: number\
+          example: -122.4194\
+        accuracy:\
+          type: number\
+          example: 25\
+        sources:\
+          type: array\
+          items:\
+            $ref: '#/components/schemas/LocationSource'\
+\
+    LocationSource:\
+      type: object\
+      properties:\
+        type:\
+          type: string\
+          example: gps\
+        accuracy:\
+          type: number\
+          example: 10\
+\
+    Device:\
+      type: object\
+      properties:\
+        imsi:\
+          type: string\
+          example: '310260000000000'\
+        provider:\
+          type: string\
+          example: AT&T\
+        signalStrength:\
+          type: integer\
+          example: -80\
+        connectedSince:\
+          type: string\
+          format: date-time\
+          example: '2023-04-01T10:30:00Z'}
